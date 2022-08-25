@@ -3,5 +3,5 @@ using Chainmail.Model;
 
 public interface IMessageAttachmentJoinRepository
 {
-    public IEnumerable<MessageAttachmentJoin> GetAll();
+    public IEnumerable<MessageAttachmentJoin> Get();
 }

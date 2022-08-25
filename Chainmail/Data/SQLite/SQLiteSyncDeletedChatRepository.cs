@@ -8,7 +8,7 @@ public class SQLiteSyncDeletedChatRepository : SQLiteDB, ISyncDeletedChatReposit
     {
     }
 
-    public SyncDeletedChat Get(int rowid)
+    public SyncDeletedChat GetSyncDeletedChat(int rowid)
     {
         if (!File.Exists(_dbPath))
         {
@@ -18,7 +18,7 @@ public class SQLiteSyncDeletedChatRepository : SQLiteDB, ISyncDeletedChatReposit
         return conn.QueryFirstOrDefault<SyncDeletedChat>("SELECT * FROM sync_deleted_chats ROWID = @rowid", new { rowid });
     }
 
-    public IEnumerable<SyncDeletedChat> GetAll()
+    public IEnumerable<SyncDeletedChat> GetSyncDeletedChats()
     {
         if (!File.Exists(_dbPath))
         {

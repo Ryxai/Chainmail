@@ -19,7 +19,7 @@ public class SQLiteHandleRepository : SQLiteDB, IHandleRepository
         return db.QueryFirstOrDefault<Handle>("SELECT * FROM handle WHERE ROWID = @rowid", new { rowid });
     }
 
-    public IEnumerable<Handle> GetAllHandles()
+    public IEnumerable<Handle> GetHandles()
     {
         if (!File.Exists(_dbPath))
         {

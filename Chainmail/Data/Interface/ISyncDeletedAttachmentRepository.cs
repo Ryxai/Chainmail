@@ -3,6 +3,6 @@ using Chainmail.Model;
 
 public interface ISyncDeletedAttachmentRepository
 {
-    public SyncDeletedAttachment Get(int rowId);
-    public IEnumerable<SyncDeletedAttachment> GetAll();
+    public SyncDeletedAttachment GetSyncDeletedAttachment(int rowid);
+    public IEnumerable<SyncDeletedAttachment> GetSyncDeletedAttachments();
 }

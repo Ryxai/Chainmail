@@ -4,11 +4,11 @@ namespace Chainmail.Data;
 
 public class SQLiteSyncDeletedAttachmentRepository: SQLiteDB, ISyncDeletedAttachmentRepository
 {
-    public SQLiteSyncedDeletedAttachmentRepository(string dbPath) : base(dbPath)
+    public SQLiteSyncDeletedAttachmentRepository(string dbPath) : base(dbPath)
     {
     }
 
-    public SyncDeletedAttachment Get(int rowid)
+    public SyncDeletedAttachment GetSyncDeletedAttachment(int rowid)
     {
         if (!File.Exists(_dbPath))
         {
@@ -18,13 +18,13 @@ public class SQLiteSyncDeletedAttachmentRepository: SQLiteDB, ISyncDeletedAttach
         return conn.QueryFirstOrDefault<SyncDeletedAttachment>("SELECT * FROM sync_deleted_attachments WHERE ROWID = @rowid", new { rowid });
     }
 
-    public IEnumerable<SyncDeletedAttachment> GetAll()
+    public IEnumerable<SyncDeletedAttachment> GetSyncDeletedAttachments()
     {
         if (!File.Exists(_dbPath))
         {
             throw new FileNotFoundException();
         }
         using var db = CreateConnection();
-        return db.Query<SyncDeletedAttachment>("SELECT * FROM handle");
+        return db.Query<SyncDeletedAttachment>("SELECT * FROM sync_deleted_attachments");
     }
 }

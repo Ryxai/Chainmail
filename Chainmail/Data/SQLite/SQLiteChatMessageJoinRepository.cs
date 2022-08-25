@@ -9,20 +9,13 @@ public class SQLiteChatMessageJoinRepository : SQLiteDB, IChatMessageJoinReposit
     {
     }
 
-    public ChatMessageJoin Get(int id)
+    public IEnumerable<ChatMessageJoin> Get()
     {
-        //Check if the _dbpath is found if not throw a filenotfounde exception
         if (!File.Exists(_dbPath))
         {
-            throw new FileNotFoundException();
+            throw new FileNotFoundException("Database not found at " + _dbPath);
         }
-        //CreateConnection then get a chatmessagejoin by id
         using var db = CreateConnection();
-        return db.QueryFirstOrDefault<ChatMessageJoin>("SELECT * FROM chat_message_join WHERE Id = @id", new { id });
-    }
-
-    public IEnumerable<ChatMessageJoin> GetAll()
-    {
-        throw new NotImplementedException();
+        return db.Query<ChatMessageJoin>("SELECT * FROM chat_message_join");
     }
 }

@@ -14,12 +14,11 @@ public class SQLiteMessageRepository : SQLiteDB, IMessageRespository
         {
             throw new FileNotFoundException("Database not found at " + _dbPath);
         }
-        //Use the CreateConnection method and get a message by id
         using var db = CreateConnection();
         return db.QueryFirstOrDefault<Message>("SELECT * FROM message WHERE ROWID = @id", new { id });
     }
 
-    public IEnumerable<Message> GetAllMessages()
+    public IEnumerable<Message> GetMessages()
     {
         if (!File.Exists(_dbPath))
         {

@@ -8,7 +8,7 @@ public class SQLiteChatHandleJoinRepository : SQLiteDB, IChatHandleJoinRepositor
     {
     }
 
-    public IEnumerable<ChatHandleJoin> GetAll()
+    public IEnumerable<ChatHandleJoin> Get()
     {
         //Check if the dbPath exists if not throw file not found
         if (!File.Exists(_dbPath))

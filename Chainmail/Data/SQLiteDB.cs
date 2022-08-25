@@ -1,9 +1,10 @@
-namespace Chainmail;
 using System.Data.SQLite;
+
+namespace Chainmail.Data;
 
 public class SQLiteDB
 {
-    private readonly string _dbPath;
+     protected readonly string _dbPath;
     
     public SQLiteDB(string dbPath)
     {

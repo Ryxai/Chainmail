@@ -9,16 +9,14 @@ public class SqLiteChatRepository: SQLiteDB, IChatRepository
     {
     }
 
-    public Chat GetChat(int id)
+    public Chat GetChat(int rowid)
     {
         if (!File.Exists(_dbPath))
         {
             throw new FileNotFoundException("Database not found at " + _dbPath);
         }
-        using (var db = CreateConnection())
-        {
-            return db.QueryFirstOrDefault<Chat>("SELECT * FROM chat WHERE ROWID = @id", new { id });
-        }
+        using var db = CreateConnection();
+        return db.QueryFirstOrDefault<Chat>("SELECT * FROM chat WHERE ROWID = @rowid", new { rowid });
     }
 
     public IEnumerable<Chat> GetChats()
@@ -27,9 +25,7 @@ public class SqLiteChatRepository: SQLiteDB, IChatRepository
         {
             throw new FileNotFoundException("Database not found at " + _dbPath);
         }
-        using (var db = CreateConnection())
-        {
-            return db.Query<Chat>("SELECT * FROM Chat");
-        }
+        using var db = CreateConnection();
+        return db.Query<Chat>("SELECT * FROM chat");
     }
 }

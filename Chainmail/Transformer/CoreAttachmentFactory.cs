@@ -9,7 +9,7 @@ public class CoreAttachmentFactory : IFactory<CoreAttachment>
 {
     private Attachment? _attachment;
     
-    public bool RecieveAttachment(Attachment? attachment)
+    public bool Load(Attachment? attachment)
     {
         if (_attachment != null)
             return false;
@@ -17,17 +17,18 @@ public class CoreAttachmentFactory : IFactory<CoreAttachment>
         return true;
     }
     
+    public bool IsReady()
+    {
+        return _attachment == null;
+    }
+    
     public Option<CoreAttachment> Assemble()
     {
-        if (_attachment == null)
+        if (!IsReady())
             return Option<CoreAttachment>.None;
         var results = new CoreAttachment(_attachment);
         _attachment = null;
         return results;
     }
 
-    public bool isReady()
-    {
-        return _attachment == null;
-    }
 }
