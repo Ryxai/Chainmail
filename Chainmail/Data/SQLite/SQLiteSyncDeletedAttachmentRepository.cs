@@ -1,4 +1,5 @@
 using Chainmail.Model;
+using Chainmail.Model.SQL;
 using Dapper;
 namespace Chainmail.Data;
 
@@ -25,6 +26,6 @@ public class SQLiteSyncDeletedAttachmentRepository: SQLiteDB, ISyncDeletedAttach
             throw new FileNotFoundException();
         }
         using var db = CreateConnection();
-        return db.Query<SyncDeletedAttachment>("SELECT * FROM sync_deleted_attachments");
+        return db.Query<SyncDeletedAttachment>("SELECT * FROM sync_deleted_attachments") ?? new List<SyncDeletedAttachment>();
     }
 }

@@ -1,4 +1,5 @@
 using Chainmail.Model;
+using Chainmail.Model.SQL;
 
 namespace Chainmail.Data;
 using Chainmail.Model;

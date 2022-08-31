@@ -1,7 +1,7 @@
-namespace Chainmail.Model;
+namespace Chainmail.Model.SQL;
 
 public class MessageAttachmentJoin
 {
-    public int message_id { get; set; }
-    public int attachment_id { get; set; }
+    public long message_id { get; set; }
+    public long attachment_id { get; set; }
 }

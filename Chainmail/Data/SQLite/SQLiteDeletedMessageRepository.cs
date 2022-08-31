@@ -1,4 +1,5 @@
 using Chainmail.Model;
+using Chainmail.Model.SQL;
 
 namespace Chainmail.Data;
 using Dapper;
@@ -25,6 +26,6 @@ public class SQLiteDeletedMessageRepository : SQLiteDB, IDeletedMessageRepositor
             throw new FileNotFoundException("Database not found at " + _dbPath);
         }
         using var conn = CreateConnection();
-        return conn.Query<DeletedMessage>("SELECT * FROM deleted_messages");
+        return conn.Query<DeletedMessage>("SELECT * FROM deleted_messages") ?? new List<DeletedMessage>();
     }
 }

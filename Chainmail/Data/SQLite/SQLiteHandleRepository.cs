@@ -1,4 +1,5 @@
 using Chainmail.Model;
+using Chainmail.Model.SQL;
 
 namespace Chainmail.Data;
 using Dapper;
@@ -26,6 +27,6 @@ public class SQLiteHandleRepository : SQLiteDB, IHandleRepository
             throw new FileNotFoundException();
         }
         using var db = CreateConnection();
-        return db.Query<Handle>("SELECT * FROM handle");
+        return db.Query<Handle>("SELECT * FROM handle") ?? new List<Handle>();
     }
 }

@@ -1,4 +1,5 @@
 using Chainmail.Model;
+using Chainmail.Model.SQL;
 using Dapper;
 namespace Chainmail.Data;
 
@@ -16,6 +17,6 @@ public class SQLiteChatHandleJoinRepository : SQLiteDB, IChatHandleJoinRepositor
             throw new FileNotFoundException("File not found at path: " + _dbPath);
         }
         using var db = CreateConnection();
-        return db.Query<ChatHandleJoin>("SELECT * FROM chat_handle_join");
+        return db.Query<ChatHandleJoin>("SELECT * FROM chat_handle_join") ?? new List<ChatHandleJoin>();
     }
 }

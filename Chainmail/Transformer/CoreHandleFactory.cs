@@ -1,5 +1,6 @@
 using Chainmail.Model;
 using Chainmail.Model.Core;
+using Chainmail.Model.SQL;
 using LanguageExt;
 
 namespace Chainmail.Transformer;
@@ -7,17 +8,43 @@ namespace Chainmail.Transformer;
 public class CoreHandleFactory : IFactory<CoreHandle>
 {
     private Handle? _handle;
-    
-    public bool Load(Handle? handle)
+    private LoadStateFlags _loadStateFlags = LoadStateFlags.None;
+
+    [Flags]
+    private enum LoadStateFlags
     {
-        if (_handle != null)
+        None = 0,
+        Handle = 1,
+        All = Handle
+    }
+
+    private void Initialize()
+    {
+        _handle = null;
+        _loadStateFlags = LoadStateFlags.None;
+    }
+
+    public CoreHandleFactory()
+    {
+        Initialize();
+    }
+    
+    public bool Load(Handle handle)
+    {
+        if (_loadStateFlags.HasFlag(LoadStateFlags.Handle))
             return false;
+        _loadStateFlags |= LoadStateFlags.Handle;
         _handle = handle;
         return true;
     }
     public bool IsReady()
     {
-        return _handle != null;
+        return _loadStateFlags == LoadStateFlags.All;
+    }
+
+    public void ForceReadyState()
+    {
+        _loadStateFlags = LoadStateFlags.All;
     }
 
     public Option<CoreHandle> Assemble()
@@ -25,7 +52,7 @@ public class CoreHandleFactory : IFactory<CoreHandle>
         if (!IsReady())
             return Option<CoreHandle>.None;
         var results = new CoreHandle(_handle);
-        _handle = null;
+        Initialize();
         return results;
     }
 }

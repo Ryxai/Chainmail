@@ -1,4 +1,5 @@
 using Chainmail.Model;
+using Chainmail.Model.SQL;
 
 namespace Chainmail.Data;
 using Dapper;
@@ -15,6 +16,6 @@ public class SQLiteMessageAttachmentJoinRepository: SQLiteDB, IMessageAttachment
             throw new FileNotFoundException("Database not found at " + _dbPath);
         }
         using var conn = CreateConnection();
-        return conn.Query<MessageAttachmentJoin>("SELECT * FROM message_attachment_join");
+        return conn.Query<MessageAttachmentJoin>("SELECT * FROM message_attachment_join") ?? new List<MessageAttachmentJoin>();
     }
 }

@@ -1,4 +1,5 @@
 using Chainmail.Model;
+using Chainmail.Model.SQL;
 using Dapper;
 namespace Chainmail.Data;
 
@@ -25,6 +26,6 @@ public class SQLiteMessageRepository : SQLiteDB, IMessageRespository
             throw new FileNotFoundException("Database not found at " + _dbPath);
         }
         using var db = CreateConnection();
-        return db.Query<Message>("SELECT * FROM message");
+        return db.Query<Message>("SELECT * FROM message") ?? new List<Message>();
     }
 }

@@ -1,7 +1,7 @@
-namespace Chainmail.Model;
+namespace Chainmail.Model.SQL;
 
 public class ChatHandleJoin
 {
-    public int chat_id { get; set; }
-    public int handle_id { get; set; }
+    public long chat_id { get; set; }
+    public long handle_id { get; set; }
 }

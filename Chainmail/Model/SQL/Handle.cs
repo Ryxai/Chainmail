@@ -1,8 +1,8 @@
-namespace Chainmail.Model;
+namespace Chainmail.Model.SQL;
 
 public class Handle
 {
-    public int ROWID { get; set; }
+    public long ROWID { get; set; }
     public string id { get; set; }
     public string country { get; set; }
     public string service { get; set; }
