@@ -5,13 +5,27 @@ using LanguageExt;
 
 namespace Chainmail.Transformer;
 
-
+/// <summary>
+/// A factory to assemble a CoreAttachment
+/// </summary>
 public class CoreAttachmentFactory : IFactory<CoreAttachment>
 {
+    /// <summary>
+    /// An attachment to be assembled
+    /// </summary>
     private Attachment? _attachment;
+    /// <summary>
+    /// A SyncDeletedAttachment which is used for the deleted status
+    /// </summary>
     private SyncDeletedAttachment? _syncDeletedAttachment;
+    /// <summary>
+    /// A set of flags used to determine if the factory has been loaded appropriately
+    /// </summary>
     private LoadStateFlags _loadStateFlags;
 
+    /// <summary>
+    /// Flags for each of the core load methods
+    /// </summary>
     [Flags]
     private enum LoadStateFlags
     {
@@ -21,6 +35,9 @@ public class CoreAttachmentFactory : IFactory<CoreAttachment>
         All = Attachment | SyncDeletedAttachment
     }
 
+    /// <summary>
+    /// Initializes the factory to a default state
+    /// </summary>
     private void Initialize()
     {
         _attachment = null;

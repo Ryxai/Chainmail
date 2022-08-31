@@ -2,21 +2,11 @@ using Chainmail.Model.Core;
 
 namespace Chainmail.Model.SQL;
 
-public class DeletedMessage : IGUIDVerifiable
+/// <summary>
+/// This is a direct mapping of the 'DeletedMessage' table from the chat.db for Dapper to import into
+/// </summary>
+public class DeletedMessage 
 {
     public int ROWID { get; set; }
     public string guid { get; set; }
-    public bool HasValidGuid()
-    {
-        try
-        {
-            var temp = new Guid(guid);
-        }
-        catch (FormatException)
-        {
-            return false;
-        }
-
-        return true;
-    }
 }

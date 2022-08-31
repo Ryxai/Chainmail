@@ -1,8 +1,10 @@
 using Chainmail.Model.Core;
 
 namespace Chainmail.Model.SQL;
-
-public class Attachment : IGUIDVerifiable
+/// <summary>
+/// This class is a direct mapping of the 'Attachment' table of the chat.db for Dapper to import into
+/// </summary>
+public class Attachment
 {
     public long ROWID { get; set; }
     public string guid { get; set; }
@@ -27,17 +29,4 @@ public class Attachment : IGUIDVerifiable
     public byte[] sr_ck_server_change_token_blob { get; set; }
     public string sr_ck_record_id { get; set; }
     public long is_commsafety_sensitive { get; set; } = 0;
-    public bool HasValidGuid()
-    {
-        try
-        {
-            var temp = new Guid(guid);
-        }
-        catch (FormatException)
-        {
-            return false;
-        }
-
-        return true;
-    }
 }

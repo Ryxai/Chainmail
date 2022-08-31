@@ -2,7 +2,10 @@ using Chainmail.Model.Core;
 
 namespace Chainmail.Model.SQL;
 
-public class Chat : IGUIDVerifiable
+/// <summary>
+/// This class is a direct mapping of the 'Chat' table of the chat.db for Dapper to import into
+/// </summary>
+public class Chat 
 {
     public long ROWID { get; set; }
     public string guid { get; set; }
@@ -32,18 +35,4 @@ public class Chat : IGUIDVerifiable
     public long is_blackholed { get; set; } = 0;
     public long syndication_date { get; set; } = 0;
     public long syndication_type { get; set; } = 0;
-
-    public bool HasValidGuid()
-    {
-        try
-        {
-            var temp = new Guid(guid);
-        }
-        catch (FormatException)
-        {
-            return false;
-        }
-
-        return true;
-    }
 }

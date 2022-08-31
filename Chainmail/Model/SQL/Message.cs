@@ -2,7 +2,10 @@ using Chainmail.Model.Core;
 
 namespace Chainmail.Model.SQL;
 
-public class Message : IGUIDVerifiable
+/// <summary>
+/// This is a direct mapping of the 'Message' table from the chat.db for Dapper to import into
+/// </summary>
+public class Message 
 {
     public long ROWID { get; set; }
     public string guid { get; set; }
@@ -82,18 +85,4 @@ public class Message : IGUIDVerifiable
     public long was_delivered_quietly { get; set; } = 0;
     public long did_notify_recipient { get; set; } = 0;
     public string synced_syndication_ranges { get; set; } = null;
-
-    public bool HasValidGuid()
-    {
-        try
-        {
-            var temp = new Guid(guid);
-        }
-        catch (FormatException)
-        {
-            return false;
-        }
-
-        return true;
-    }
 }
